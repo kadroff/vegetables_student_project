@@ -1,39 +1,128 @@
-let vegetables = [0, 0, 0]
+let potatoes = [0, 0, 0]
+let carrot = [0, 0, 0]
+let pepper = [0, 0, 0];
+let tomato = [0, 0, 0];
+let cabbage = [0, 0, 0];
+let parsley = [0, 0, 0];
 let start = false;
 let speed = 1;
-let vegetablesCount = 300;
+let vegetablesCount = 10;
+let profit = 0;
+let electro = 0;
+let wage = 0;
+let crash = 0;
+
 
 let hrs = 0
 let mins = 0
 let secs = 0
 
+const arrSum = (arr) => {
+    const sum = arr.reduce((acc, cur) => acc + cur, 0);
+    return sum;
+}
+
 setInterval(() => {
     if (start) {
-        const randomIndex = getRandomInt(3)
-        vegetables[randomIndex] += speed;
-        vegetablesCount -= speed;
-        document.getElementById('roots').innerHTML = "Корневые " + '<strong>' + vegetables[0] + '</strong>';
-        document.getElementById('fruits').innerHTML = "Плодовые " + '<strong>' + vegetables[1] + '</strong>';
-        document.getElementById('leafy').innerHTML = "Листовые " + '<strong>' + vegetables[2] + '</strong>';
-        document.getElementById('vegetables').innerHTML = "Количество овощей: " + '<strong>' + vegetablesCount + '</strong>';
+        const randomIndex = getRandomInt(6)
+        const randomIndexPotatioes = getRandomInt(3)
+        const randomIndexCarrot = getRandomInt(3);
+        const randomIndexPepper = getRandomInt(3);
+        const randomIndexTomato = getRandomInt(3);
+
+        if (randomIndex === 0) {
+            potatoes[randomIndexPotatioes] += speed;
+        } else if (randomIndex === 1) {
+            carrot[randomIndexCarrot] += speed;
+        } else if (randomIndex === 2) {
+            pepper[randomIndexPepper] += speed;
+        } else if (randomIndex === 3) {
+            tomato[randomIndexTomato] += speed;
+        } else if (randomIndex === 4) {
+            cabbage[randomIndexTomato] += speed;
+        } else if (randomIndex === 5) {
+            parsley[randomIndexCarrot] += speed;
+        }
+
+        const potatoesSum = arrSum(potatoes);
+        const carrotSum = arrSum(potatoes);
+        const pepperSum = arrSum(pepper);
+        const tomatoSum = arrSum(tomato);
+        const cabbageSum = arrSum(cabbage);
+        const parsleySum = arrSum(parsley);
+        profit = potatoesSum * 30 + carrotSum * 35 + pepperSum * 25 + tomatoSum * 35 + cabbageSum * 70 + parsleySum * 50;
+        electro += 20
+        wage += 30
+
+        if (potatoesSum > 80) {
+            alert("Контейнеры картофеля заполнены, они отправлены на загрузку")
+            potatoes = [0, 0, 0];
+        } else if (carrotSum > 80) {
+            alert("Контейнеры с морковью заполнены, они отправлены на загрузку")
+            carrot = [0, 0, 0];
+        } else if (pepperSum > 80) {
+            alert("Контейнеры с перцами заполнены, они отправлены на загрузку")
+            pepper = [0, 0, 0];
+        } else if (tomatoSum > 80) {
+            alert("Контейнеры с томатами заполнены, они отправлены на загрузку")
+            tomato = [0, 0, 0];
+        } else if (cabbageSum > 80) {
+            alert("Контейнеры с капустой заполнены, они отправлены на загрузку")
+            cabbage = [0, 0, 0];
+        } else if (parsleySum > 80) {
+            alert("Контейнеры с петрушкой заполнены, они отправлены на загрузку")
+            parsley = [0, 0, 0];
+        }
+
+
+        // Картофель
+        document.getElementById('small_potatoes').innerHTML = "Мелкий " + '<strong>' + potatoes[0] + '</strong>';
+        document.getElementById('big_potatoes').innerHTML = "Крупный " + '<strong>' + potatoes[1] + '</strong>';
+        document.getElementById('refuse_potatoes').innerHTML = "Брак " + '<strong>' + potatoes[2] + '</strong>';
+
+        // Морковь 
+        document.getElementById('carrot_small').innerHTML = "Мелкий " + '<strong>' + carrot[0] + '</strong>';
+        document.getElementById('carrot_big').innerHTML = "Крупный " + '<strong>' + carrot[1] + '</strong>';
+        document.getElementById('carrot_refuse').innerHTML = "Брак " + '<strong>' + carrot[2] + '</strong>';
+
+        // Перец
+        document.getElementById('black_pepper').innerHTML = "Черный перец " + '<strong>' + pepper[0] + '</strong>';
+        document.getElementById('red_pepper').innerHTML = "Красный перец " + '<strong>' + pepper[1] + '</strong>';
+        document.getElementById('red_sweety_pepper').innerHTML = "Сладкий красный перец " + '<strong>' + pepper[2] + '</strong>';
+
+        // Томаты
+        document.getElementById('medium_tomato').innerHTML = "Среднеранние томаты " + '<strong>' + tomato[0] + '</strong>';
+        document.getElementById('easy_tomato').innerHTML = "Раннеспелые томаты " + '<strong>' + tomato[1] + '</strong>';
+        document.getElementById('cherry_tomato').innerHTML = "Черри томаты " + '<strong>' + tomato[2] + '</strong>';
+
+        // Капуста
+        document.getElementById('white_cabbage').innerHTML = "Белокочанная капуста " + '<strong>' + cabbage[0] + '</strong>';
+        document.getElementById('colors_cabbage').innerHTML = "Цветная капуста " + '<strong>' + cabbage[1] + '</strong>';
+        document.getElementById('red_cabbage').innerHTML = "Краснокочанная капуста " + '<strong>' + cabbage[2] + '</strong>';
+
+        // Петрушка
+        document.getElementById('list_parsley').innerHTML = "Листовая " + '<strong>' + parsley[0] + '</strong>';
+        document.getElementById('curly_parsley').innerHTML = "Кудрявая " + '<strong>' + parsley[1] + '</strong>';
+        document.getElementById('fail_parsley').innerHTML = "Брак " + '<strong>' + parsley[2] + '</strong>';
+
+
+        document.getElementById('vegetables').innerHTML = "Количество неотсортированных овощей: " + '<strong>' + vegetablesCount + '</strong>';
         document.getElementById('speed').innerHTML = "Текущая скорость сортировки: " + '<strong>' + speed + '</strong>';
 
-        document.getElementById('economic_roots').innerHTML = "Экономический показатель: " + '<strong>' + vegetables[0] * 25 + 'руб.' + '</strong>';
-        document.getElementById('economic_fruits').innerHTML = "Экономический показатель: " + '<strong>' + vegetables[1] * 25 + 'руб.' + '</strong>';
-        document.getElementById('economic_leafy').innerHTML = "Экономический показатель: " + '<strong>' + vegetables[2] * 25 + 'руб.' + '</strong>';
+        document.getElementById('profit').innerHTML = "Прибыль: " + '<strong>' + profit * 2 + 'руб.' + '</strong>';
+        document.getElementById('electro').innerHTML = "Расходы на электроэнергию: " + '<strong>' + electro + 'руб.' + '</strong>';
+        document.getElementById('wage').innerHTML = "Расходы на зп сотрудникам: " + '<strong>' + wage + 'руб.' + '</strong>';
+        document.getElementById('crash').innerHTML = "Расходы на устранение аварии: " + '<strong>' + crash + 'руб.' + '</strong>';
 
+        vegetablesCount -= speed;
         startWatch()
     }
 
     if (vegetablesCount <= 0) {
         if (confirm("Внимание. Все овощи отсортированы?")) {
             vegetablesCount = prompt("Введите количество овощей для сортировки", "")
-        } else {
-            document.location.reload()
         }
     }
-
-    console.log(vegetables);
 }, 1000)
 
 
@@ -101,10 +190,10 @@ const createGraphic = () => {
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Корневые', 'Плодовые', 'Листовые'],
+            labels: ['Прибыль', 'Электроэнергия', 'ЗП', 'Авария'],
             datasets: [{
                 label: 'Экономические показатели',
-                data: [vegetables[0] * 25, vegetables[1] * 25, vegetables[2] * 25],
+                data: [profit * 2, electro, wage, crash],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -136,7 +225,7 @@ const createGraphic = () => {
                 xAxes: [{
                     scaleLabel: {
                         display: true,
-                        labelString: 'Типы овощей',
+                        labelString: 'Экономические показатели',
                         fontSize: 16,
                     }
                 }]
@@ -148,16 +237,13 @@ createGraphic();
 
 document.querySelector('#network_crash').onclick = () => {
     start = false;
-    alert('Отсутствует подключение к интернету. Попробуй перезагрузить систему')
+    alert('Произошли неполадки в поставке. Система приостановлена')
+    crash += 10000
 }
 
 document.querySelector('#supply_crash').onclick = () => {
     start = false;
-    alert('Произошли неполадки с поставкой овощей. Попробуй перезагрузить систему')
+    alert('Произошли неполадки в системе фильтрации овощей. Система приостановлена')
+    crash += 15000
 }
 
-document.querySelector('#send_vegetables').onclick = () => {
-    var sel = document.getElementById('select');
-    var opt = sel.options[sel.selectedIndex];
-    alert('Все овощи отправлены на ' + opt.value)
-}
