@@ -76,34 +76,34 @@ setInterval(() => {
 
 
         // Картофель
-        document.getElementById('small_potatoes').innerHTML = "Мелкий " + '<strong>' + potatoes[0] + '</strong>';
-        document.getElementById('big_potatoes').innerHTML = "Крупный " + '<strong>' + potatoes[1] + '</strong>';
-        document.getElementById('refuse_potatoes').innerHTML = "Брак " + '<strong>' + potatoes[2] + '</strong>';
+        document.getElementById('small_potatoes').innerHTML = "Мелкий " + '<strong>' + potatoes[0] + '</strong>' + ' (тара по 250кг)';
+        document.getElementById('big_potatoes').innerHTML = "Крупный " + '<strong>' + potatoes[1] + '</strong>' + ' (тара по 250кг)';
+        document.getElementById('refuse_potatoes').innerHTML = "Брак " + '<strong>' + potatoes[2] + '</strong>' + ' (тара по 150кг)';
 
         // Морковь 
-        document.getElementById('carrot_small').innerHTML = "Мелкий " + '<strong>' + carrot[0] + '</strong>';
-        document.getElementById('carrot_big').innerHTML = "Крупный " + '<strong>' + carrot[1] + '</strong>';
-        document.getElementById('carrot_refuse').innerHTML = "Брак " + '<strong>' + carrot[2] + '</strong>';
+        document.getElementById('carrot_small').innerHTML = "Мелкий " + '<strong>' + carrot[0] + '</strong>' + ' (тара по 250кг)';
+        document.getElementById('carrot_big').innerHTML = "Крупный " + '<strong>' + carrot[1] + '</strong>' + ' (тара по 250кг)';
+        document.getElementById('carrot_refuse').innerHTML = "Брак " + '<strong>' + carrot[2] + '</strong>' + ' (тара по 150кг)';
 
         // Перец
-        document.getElementById('black_pepper').innerHTML = "Черный перец " + '<strong>' + pepper[0] + '</strong>';
-        document.getElementById('red_pepper').innerHTML = "Красный перец " + '<strong>' + pepper[1] + '</strong>';
-        document.getElementById('red_sweety_pepper').innerHTML = "Сладкий красный перец " + '<strong>' + pepper[2] + '</strong>';
+        document.getElementById('black_pepper').innerHTML = "Черный перец " + '<strong>' + pepper[0] + '</strong>' + ' (тара по 250кг)';
+        document.getElementById('red_pepper').innerHTML = "Красный перец " + '<strong>' + pepper[1] + '</strong>' + ' (тара по 250кг)';
+        document.getElementById('red_sweety_pepper').innerHTML = "Сладкий красный перец " + '<strong>' + pepper[2] + '</strong>' + ' (тара по 250кг)';
 
         // Томаты
-        document.getElementById('medium_tomato').innerHTML = "Среднеранние томаты " + '<strong>' + tomato[0] + '</strong>';
-        document.getElementById('easy_tomato').innerHTML = "Раннеспелые томаты " + '<strong>' + tomato[1] + '</strong>';
-        document.getElementById('cherry_tomato').innerHTML = "Черри томаты " + '<strong>' + tomato[2] + '</strong>';
+        document.getElementById('medium_tomato').innerHTML = "Среднеранние томаты " + '<strong>' + tomato[0] + '</strong>' + ' (тара по 250кг)';
+        document.getElementById('easy_tomato').innerHTML = "Раннеспелые томаты " + '<strong>' + tomato[1] + '</strong>' + ' (тара по 250кг)';
+        document.getElementById('cherry_tomato').innerHTML = "Черри томаты " + '<strong>' + tomato[2] + '</strong>' + ' (тара по 250кг)';
 
         // Капуста
-        document.getElementById('white_cabbage').innerHTML = "Белокочанная капуста " + '<strong>' + cabbage[0] + '</strong>';
-        document.getElementById('colors_cabbage').innerHTML = "Цветная капуста " + '<strong>' + cabbage[1] + '</strong>';
-        document.getElementById('red_cabbage').innerHTML = "Краснокочанная капуста " + '<strong>' + cabbage[2] + '</strong>';
+        document.getElementById('white_cabbage').innerHTML = "Белокочанная капуста " + '<strong>' + cabbage[0] + '</strong>' + ' (тара по 250кг)';
+        document.getElementById('colors_cabbage').innerHTML = "Цветная капуста " + '<strong>' + cabbage[1] + '</strong>' + ' (тара по 250кг)';
+        document.getElementById('red_cabbage').innerHTML = "Краснокочанная капуста " + '<strong>' + cabbage[2] + '</strong>' + ' (тара по 250кг)';
 
         // Петрушка
-        document.getElementById('list_parsley').innerHTML = "Листовая " + '<strong>' + parsley[0] + '</strong>';
-        document.getElementById('curly_parsley').innerHTML = "Кудрявая " + '<strong>' + parsley[1] + '</strong>';
-        document.getElementById('fail_parsley').innerHTML = "Брак " + '<strong>' + parsley[2] + '</strong>';
+        document.getElementById('list_parsley').innerHTML = "Листовая " + '<strong>' + parsley[0] + '</strong>' + ' (тара по 250кг)';
+        document.getElementById('curly_parsley').innerHTML = "Кудрявая " + '<strong>' + parsley[1] + '</strong>' + ' (тара по 250кг)';
+        document.getElementById('fail_parsley').innerHTML = "Брак " + '<strong>' + parsley[2] + '</strong>' + ' (тара по 150кг)';
 
 
         document.getElementById('vegetables').innerHTML = "Количество неотсортированных овощей: " + '<strong>' + vegetablesCount + '</strong>';
