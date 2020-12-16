@@ -1,8 +1,8 @@
-let potatoes = [0, 0, 0]
+let potatoes = [0, 0, 0, 0]
 let carrot = [0, 0, 0]
-let pepper = [0, 0, 0];
+let pepper = [0, 0, 0, 0];
 let tomato = [0, 0, 0];
-let cabbage = [0, 0, 0];
+let cabbage = [0, 0, 0, 0];
 let parsley = [0, 0, 0];
 let start = false;
 let speed = 1;
@@ -11,6 +11,10 @@ let profit = 0;
 let electro = 0;
 let wage = 0;
 let crash = 0;
+
+let potatoesCount = 30;
+let pepperCount = 20;
+let cabbageCount = 35;
 
 let potatoesOne = 0;
 let potatoesTwo = 0;
@@ -40,6 +44,13 @@ let hrs = 0
 let mins = 0
 let secs = 0
 
+let potatoesContainer = 0;
+let pepperContainer = 0;
+let cabbageContainer = 0;
+let price_container = 0;
+
+let container = 10;
+
 const arrSum = (arr) => {
     const sum = arr.reduce((acc, cur) => acc + cur, 0);
     return sum;
@@ -47,102 +58,124 @@ const arrSum = (arr) => {
 
 setInterval(() => {
     if (start) {
-        const randomIndex = getRandomInt(6)
-        const randomIndexPotatioes = getRandomInt(3)
-        const randomIndexCarrot = getRandomInt(3);
-        const randomIndexPepper = getRandomInt(3);
-        const randomIndexTomato = getRandomInt(3);
+        const randomIndex = getRandomInt(3)
+        const randomIndexPotatioes = getRandomInt(4)
+        const randomIndexPepper = getRandomInt(4);
+        const randomIndexCabbage = getRandomInt(4);
 
         if (randomIndex === 0) {
             potatoes[randomIndexPotatioes] += speed;
+            potatoesContainer++;
         } else if (randomIndex === 1) {
-            carrot[randomIndexCarrot] += speed;
-        } else if (randomIndex === 2) {
             pepper[randomIndexPepper] += speed;
-        } else if (randomIndex === 3) {
-            tomato[randomIndexTomato] += speed;
-        } else if (randomIndex === 4) {
-            cabbage[randomIndexTomato] += speed;
-        } else if (randomIndex === 5) {
-            parsley[randomIndexCarrot] += speed;
+            pepperContainer++
+        } else if (randomIndex === 2) {
+            cabbage[randomIndexCabbage] += speed;
+            cabbageContainer++;
         }
+
+        if (potatoesContainer === 4) {
+            potatoesCount -= speed;
+            potatoesContainer = 0;
+        } else if (pepperContainer === 4) {
+            pepperCount -= speed;
+            pepperContainer = 0;
+        } else if (cabbageContainer === 4) {
+            cabbageCount -= speed;
+            cabbageContainer = 0;
+        }
+
 
         const potatoesSum = arrSum(potatoes);
         const carrotSum = arrSum(potatoes);
         const pepperSum = arrSum(pepper);
         const tomatoSum = arrSum(tomato);
         const cabbageSum = arrSum(cabbage);
-        const parsleySum = arrSum(parsley);
-        profit = potatoesSum * 30 + carrotSum * 35 + pepperSum * 25 + tomatoSum * 35 + cabbageSum * 70 + parsleySum * 50;
+        // profit = potatoesSum * 30 + carrotSum * 35 + pepperSum * 25 + tomatoSum * 35 + cabbageSum * 70 + parsleySum * 50;
         electro += 20
         wage += 30
 
-        if (potatoesOne > 0 && potatoesTwo > 0 && potatoesThree > 0) {
-            alert("Контейнеры картофеля заполнены, они отправлены на загрузку")
-            potatoes = [0, 0, 0];
-        } else if (carrotOne > 0 && carrotTwo > 0 && carrotThree > 0) {
-            alert("Контейнеры с морковью заполнены, они отправлены на загрузку")
-            carrot = [0, 0, 0];
-        } else if (pepperOne > 0 && pepperTwo > 0 && pepperThree > 0) {
-            alert("Контейнеры с перцами заполнены, они отправлены на загрузку")
-            pepper = [0, 0, 0];
-        } else if (tomatoOne > 0 && tomatoTwo > 0 && tomatoThree > 0) {
-            alert("Контейнеры с томатами заполнены, они отправлены на загрузку")
-            tomato = [0, 0, 0];
-        } else if (cabbageOne > 0 && cabbageTwo > 0 && cabbageThree > 0) {
-            alert("Контейнеры с капустой заполнены, они отправлены на загрузку")
-            cabbage = [0, 0, 0];
-        } else if (parsleyOne > 0 && parsleyTwo > 0 && parsleyThree > 0) {
-            alert("Контейнеры с петрушкой заполнены, они отправлены на загрузку")
-            parsley = [0, 0, 0];
+        if (potatoesSum > 15) {
+            alert("Тары с картофелем заполнены и помещены в контейнер")
+            potatoes = [0, 0, 0, 0];
+            container--;
+            profit += 3000
         }
 
-        // Картофель
-        document.getElementById('small_potatoes').innerHTML = `Мелкий <strong>  ${potatoes[0]} </strong>  (тара : ${potatoes[0] % 10 === 0 ? potatoesOne = potatoes[0].toString().slice(0, 1) : potatoesOne})`;
-        document.getElementById('big_potatoes').innerHTML = `Крупный<strong>  ${potatoes[1]} </strong>(тара: ${potatoes[1] % 10 === 0 ? potatoesTwo = potatoes[1].toString().slice(0, 1) : potatoesTwo})`;
-        document.getElementById('refuse_potatoes').innerHTML = `Брак <strong> ${potatoes[2]} </strong> (тара: ${potatoes[2] % 10 === 0 ? potatoesThree = potatoes[2].toString().slice(0, 1) : potatoesThree})`;
+        if (cabbageSum > 15) {
+            alert("Тары с капустой заполнены и помещены в контейнер")
+            cabbage = [0, 0, 0, 0];
+            container--;
+            profit += 2500
+        }
 
-        // Морковь 
-        document.getElementById('carrot_small').innerHTML = `Мелкий <strong>  ${carrot[0]} </strong> (тара: ${carrot[0] % 10 === 0 ? carrotOne = carrot[0].toString().slice(0, 1) : carrotOne})`;
-        document.getElementById('carrot_big').innerHTML = `Крупный <strong> ${carrot[1]} </strong> (тара: ${carrot[1] % 10 === 0 ? carrotTwo = carrot[1].toString().slice(0, 1) : carrotTwo})`;
-        document.getElementById('carrot_refuse').innerHTML = `Брак <strong> ${carrot[2]} </strong> (тара: ${carrot[2] % 10 === 0 ? carrotThree = carrot[2].toString().slice(0, 1) : carrotThree})`;
+        if (pepperSum > 15) {
+            alert("Тары с перцем заполнены и помещены в контейнер")
+            pepper = [0, 0, 0, 0];
+            container--;
+            profit += 4000
+        }
+
+        document.getElementById('potatoes').innerHTML = `Картофель ${potatoesCount} тонн`
+        document.getElementById('pepper').innerHTML = `Перец ${pepperCount} тонн`
+        document.getElementById('cabbage').innerHTML = `Капуста ${cabbageCount} тонн`
+
+        // Картофель
+        document.getElementById('small_potatoes').innerHTML = `Тара с ранними сортами <strong>  ${potatoes[0]} </strong>  (по 250кг)`;
+        document.getElementById('big_potatoes').innerHTML = `Тара с средними сортами <strong>  ${potatoes[1]} </strong> (по 250кг)`;
+        document.getElementById('last_potatoes').innerHTML = `Тара с поздними сорта картофеля <strong> ${potatoes[2]} </strong> (по 250кг)`;
+        document.getElementById('refuse_potatoes').innerHTML = `Тара с браком <strong> ${potatoes[3]} </strong> `;
+
 
         // Перец
-        document.getElementById('black_pepper').innerHTML = `Черный перец <strong> ${pepper[0]} </strong> (тара: ${pepper[0] % 10 === 0 ? pepperOne = pepper[0].toString().slice(0, 1) : pepperOne})`;
-        document.getElementById('red_pepper').innerHTML = `Красный перец <strong> ${pepper[1]} </strong> (тара: ${pepper[1] % 10 === 0 ? pepperTwo = pepper[1].toString().slice(0, 1) : pepperTwo})`;
-        document.getElementById('red_sweety_pepper').innerHTML = `Сладкий красный перец <strong> ${pepper[2]} </strong> (тара: ${pepper[2] % 10 === 0 ? pepperThree = pepper[2].toString().slice(0, 1) : pepperThree})`;
+        document.getElementById('black_pepper').innerHTML = `Тара с черным перцем <strong> ${pepper[0]} </strong> (по 250кг)`;
+        document.getElementById('red_pepper').innerHTML = `Тара с красным перцем <strong> ${pepper[1]} </strong> (по 250кг)`;
+        document.getElementById('red_sweety_pepper').innerHTML = `Тара с сладким красным перцем <strong> ${pepper[2]} </strong> (по 250кг)`;
+        document.getElementById('refuse_pepper').innerHTML = `Тара с браком <strong> ${pepper[3]} </strong> (по 250кг)`;
 
-        // Томаты
-        document.getElementById('medium_tomato').innerHTML = `Среднеранние томаты <strong> ${tomato[0]} </strong> (тара: ${tomato[0] % 10 === 0 ? tomatoOne = tomato[0].toString().slice(0, 1) : tomatoOne})`;
-        document.getElementById('easy_tomato').innerHTML = `Раннеспелые томаты <strong> ${tomato[1]} </strong> (тара: ${tomato[1] % 15 === 0 ? tomatoTwo = tomato[1].toString().slice(0, 1) : tomatoTwo})`;
-        document.getElementById('cherry_tomato').innerHTML = `Черри томаты <strong> ${tomato[2]} </strong> (тара: ${tomato[2] % 15 === 0 ? tomatoThree = tomato[2].toString().slice(0, 1) : tomatoThree})`;
 
         // Капуста
-        document.getElementById('white_cabbage').innerHTML = `Белокочанная капуста <strong> ${cabbage[0]} </strong> (тара: ${cabbage[0] % 10 === 0 ? cabbageOne = cabbage[0].toString().slice(0, 1) : cabbageOne})`;
-        document.getElementById('colors_cabbage').innerHTML = `Цветная капуста <strong> ${cabbage[1]} </strong>  (тара: ${cabbage[1] % 10 === 0 ? cabbageTwo = cabbage[1].toString().slice(0, 1) : cabbageTwo})`;
-        document.getElementById('red_cabbage').innerHTML = `Краснокочанная капуста <strong> ${cabbage[2]} </strong>  (тара: ${cabbage[2] % 10 === 0 ? cabbageThree = cabbage[2].toString().slice(0, 1) : cabbageThree})`;
-
-        // Петрушка
-        document.getElementById('list_parsley').innerHTML = `Листовая <strong>  ${parsley[0]} </strong> (тара: ${parsley[0] % 10 === 0 ? parsleyOne = parsley[0].toString().slice(0, 1) : parsleyOne})`;
-        document.getElementById('curly_parsley').innerHTML = `Кудрявая <strong> ${parsley[1]} </strong> (тара: ${parsley[1] % 10 === 0 ? parsleyTwo = parsley[1].toString().slice(0, 1) : parsleyTwo})`;
-        document.getElementById('fail_parsley').innerHTML = `Брак <strong> ${parsley[2]} </strong> (тара: ${parsley[2] % 10 === 0 ? parsleyThree = parsley[2].toString().slice(0, 1) : parsleyThree})`;
+        document.getElementById('white_cabbage').innerHTML = `Тара с белокочанной капустой <strong> ${cabbage[0]} </strong> (по 250кг)`;
+        document.getElementById('colors_cabbage').innerHTML = `Тара с цветной капустой <strong> ${cabbage[1]} </strong> (по 250кг)`;
+        document.getElementById('red_cabbage').innerHTML = `Тара с краснокочанной капустой <strong> ${cabbage[2]} </strong> (по 250кг)`;
+        document.getElementById('refuse_cabbage').innerHTML = `Тара с браком <strong> ${cabbage[3]} </strong> (по 250кг)`;
 
 
-        document.getElementById('vegetables').innerHTML = "Количество неотсортированных овощей: " + '<strong>' + vegetablesCount + '</strong>';
+
+
+        document.getElementById('vegetables').innerHTML = "Количество контейнеров: " + '<strong>' + container + '</strong>';
         document.getElementById('speed').innerHTML = "Текущая скорость сортировки: " + '<strong>' + speed + '</strong>';
 
-        document.getElementById('profit').innerHTML = "Прибыль: " + '<strong>' + profit * 2 + 'руб.' + '</strong>';
+        document.getElementById('profit').innerHTML = "Прибыль: " + '<strong>' + profit + 'руб.' + '</strong>';
         document.getElementById('electro').innerHTML = "Расходы на электроэнергию: " + '<strong>' + electro + 'руб.' + '</strong>';
         document.getElementById('wage').innerHTML = "Расходы на зп сотрудникам: " + '<strong>' + wage + 'руб.' + '</strong>';
         document.getElementById('crash').innerHTML = "Расходы на устранение аварии: " + '<strong>' + crash + 'руб.' + '</strong>';
+        document.getElementById('price_container').innerHTML = "Расходы на покупку контейнеров: " + '<strong>' + price_container + 'руб.' + '</strong>';
 
         vegetablesCount -= speed;
         startWatch()
     }
 
-    if (vegetablesCount <= 0) {
-        if (confirm("Внимание. Все овощи отсортированы?")) {
-            vegetablesCount = prompt("Введите количество овощей для сортировки", "")
+    if (potatoesCount <= 0) {
+        if (confirm("Внимание. Весь картофель отсортирован?")) {
+            potatoesCount = prompt("Введите количество тонн для сортировки", "")
+        }
+    }
+    if (cabbageCount <= 0) {
+        if (confirm("Внимание. Вся капуста отсортирована?")) {
+            cabbageCount = prompt("Введите количество тонн для сортировки", "")
+        }
+    }
+    if (pepperCount <= 0) {
+        if (confirm("Внимание. Весь перец отсортирован?")) {
+            pepperCount = prompt("Введите количество тонн для сортировки", "")
+        }
+    }
+
+    if (container <= 0) {
+        if (confirm("Внимание. Все контейнеры закончены, закуплены новые")) {
+            container = 20;
+            price_container = 30000;
         }
     }
 }, 1000)
@@ -212,10 +245,10 @@ const createGraphic = () => {
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Прибыль', 'Электроэнергия', 'ЗП', 'Авария'],
+            labels: ['Прибыль', 'Электроэнергия', 'ЗП', 'Авария', 'Затраты на покупку контейнеров'],
             datasets: [{
                 label: 'Экономические показатели',
-                data: [profit * 2, electro, wage, crash],
+                data: [profit * 2, electro, wage, crash, price_container],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
